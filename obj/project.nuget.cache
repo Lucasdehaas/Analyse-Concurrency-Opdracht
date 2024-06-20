@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "gw8vHlkM9ULUT6kO4FikAUHd8ZnO2vukFYR/Ogfxcd7cjtvD89TqTXZuBn/K1QjWyD/48XPjThoesT1N2EtWcA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\dehaa\\Documents\\booksforall_student\\booksforall.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dehaa\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.24\\microsoft.netcore.app.ref.6.0.24.nupkg.sha512",
+    "C:\\Users\\dehaa\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.24\\microsoft.windowsdesktop.app.ref.6.0.24.nupkg.sha512",
+    "C:\\Users\\dehaa\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.24\\microsoft.aspnetcore.app.ref.6.0.24.nupkg.sha512",
+    "C:\\Users\\dehaa\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.24\\microsoft.netcore.app.host.win-x64.6.0.24.nupkg.sha512"
+  ],
+  "logs": []
+}
