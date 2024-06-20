@@ -56,6 +56,7 @@ public class Clerk
                             //  but DO NOT remove the existing one
                             // do not alter the order of the instructions.
     {
+
         //the clerk will put the book in the counter
         // find an available book, but do not remove it from the original records
         Console.WriteLine($"Clerk [{_id}] is going to check in the records for a book to put on the counter");

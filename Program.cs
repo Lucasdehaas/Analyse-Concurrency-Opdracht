@@ -5,10 +5,13 @@ namespace booksforall
     internal class Program
     {
         //feel free to change the following values and if needed add variables
-        public static int n_threads = 1000;// feel free to change this value
+        public static int n_threads = 10;// feel free to change this value
 
-        private static readonly string studentname1 = "";   //name and surname of the student1
-        private static readonly string studentnum1 = "";    //student number
+        private static Thread[] customer_threads = new Thread[n_threads];
+        private static Thread[] clerk_threads = new Thread[n_threads];
+
+        private static readonly string studentname1 = "Lucas de Haas";   //name and surname of the student1
+        private static readonly string studentnum1 = "1061095";    //student number
         private static readonly string studentname2 = "";   //name and surname of the student2
         private static readonly string studentnum2 = "";    //student number2
 
@@ -81,20 +84,38 @@ namespace booksforall
         public static void InitCustomers() // feel free to alter this method if needed
         {
             //init the customers
+            for (int i = 0; i < n_customers; i++)
+            {
+                customers[i] = new Customer(i);
+                customer_threads[i] = new Thread(customers[i].DoWork);
+            }
 
         }
         public static void InitClerks() // feel free to alter this method if needed
         {
             //init the clerks
+            for (int i = 0; i < n_threads; i++)
+            {
+                clerks[i] = new Clerk(i);
+                clerk_threads[i] = new Thread(clerks[i].DoWork);
+            }
 
         }
         public static void StartClerks() // feel free to alter this method if needed
         {
             //start the clerks
+            for (int i = 0; i < n_threads; i++)
+            {
+                clerk_threads[i].Start();
+            }
         }
         public static void StartCustomers() // feel free to alter this method if needed
         {
             //start the customers
+            for (int i = 0; i < n_threads; i++)
+            {
+                customer_threads[i].Start();
+            }
         }
 
     }

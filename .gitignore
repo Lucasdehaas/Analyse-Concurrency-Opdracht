@@ -1,0 +1,82 @@
+# Local History for Visual Studio Code
+.history/
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# JetBrains Rider
+*.sln.iml
+
+# Standard .NET and Visual Studio files and folders
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.nupkg
+*.dll
+*.exe
+*.pdb
+*.cache
+*.vsp
+*.vspx
+*.snk
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+
+# VS Code directories
+.vscode/
+
+# Optional: Exclude the .vs folder for Visual Studio IDE
+.vs/
+
+# Exclude user-specific files for Rider
+.idea/
+
+# Exclude the global.json file if you wish to specify SDK versions locally
+# global.json
+
+# Exclude application settings, might contain sensitive data
+appsettings*.json
+# Uncomment if appsettings files are not needed in the repo
+#!appsettings.Development.json
+#!appsettings.Production.json
+
+# Exclude environment-specific files
+*.env
+*.env.local
+
+# Exclude local development certificate for ASP.NET Core
+*.pfx
+*.crt
+*.key
+
+# User-specific files
+*.rsuser
+*.csproj.user
+*.vbproj.user
