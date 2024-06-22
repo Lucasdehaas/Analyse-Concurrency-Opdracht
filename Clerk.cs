@@ -3,7 +3,7 @@ namespace booksforall;
 public class Clerk
 {
     // feel free to add necessary fields
-
+    private static readonly object _recordlock = new object();
     // this is where we store the records of books borrowed and returned
     // only the clerk can access this list
     private static LinkedList<BookRecord> _records; //do not alter this line
@@ -62,46 +62,56 @@ public class Clerk
         Console.WriteLine($"Clerk [{_id}] is going to check in the records for a book to put on the counter");
 
         Book? t_book = null;
-
-        foreach (var record in _records)    // the clerk will look in the records
-                                            // for a book that is not yet borrowed
+        lock (_recordlock)
         {
-
-            if (record.IsBorrowed == false)
+            foreach (var record in _records)    // the clerk will look in the records
+                                                // for a book that is not yet borrowed
             {
-                t_book = record.Book;
 
-                record.IsBorrowed = true;
+                if (record.IsBorrowed == false)
+                {
+                    t_book = record.Book;
 
-                break;
+                    record.IsBorrowed = true;
+
+                    break;
+                }
+
             }
-
         }
         Console.WriteLine($"Clerk [{_id}] putting book [{t_book.BookId}] on the counter");
 
-
-        Program.counter.AddFirst(t_book);
+        lock (Program._counterlock)
+        {
+            Program.counter.AddFirst(t_book);
+        }
+        Program._semaphorecounter.Release();
         // the clerk will put the book on the counter for the customer
 
         Thread.Sleep(new Random().Next(100, 500));
         //the clerk will take a nap for overworking
 
         //the clerk will wait for a book in the dropoff
+        Program._semaphoredropoff.WaitOne();
+        lock (Program._dropofflock)
+        {
+            t_book = Program.dropoff.First();
 
-        t_book = Program.dropoff.First();
-
-        Program.dropoff.RemoveFirst();
-
+            Program.dropoff.RemoveFirst();
+        }
         //the clerk will check the book in the records
         Console.WriteLine($"Clerk [{_id}] is checking in the book [{t_book.BookId}] in the records");
 
-        foreach (BookRecord record in _records)
+        lock (_recordlock)
         {
-            if (record.Book.BookId == t_book.BookId)
+            foreach (BookRecord record in _records)
             {
-                record.IsBorrowed = false;
+                if (record.Book.BookId == t_book.BookId)
+                {
+                    record.IsBorrowed = false;
 
-                break;
+                    break;
+                }
             }
         }
     }

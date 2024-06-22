@@ -22,11 +22,14 @@ public class Customer
 
         // the customer will come to the library when the book is ready
         // the customer picks up a book that he requested
+        Program._semaphorecounter.WaitOne();
+        lock (Program._counterlock)
+        {
+            _currentBook = Program.counter.First();
 
-        _currentBook = Program.counter.First();
+            Program.counter.RemoveFirst();
 
-        Program.counter.RemoveFirst();
-
+        }
         Console.WriteLine($"Customer {_id} is about to read the book {_currentBook.BookId}");
 
         // the customer will take the book to read
@@ -34,12 +37,14 @@ public class Customer
 
         //the customer will return the book to the dropoff
         Console.WriteLine($"Customer {_id} is dropping off the book {_currentBook.BookId}");
+        lock (Program._dropofflock)
+        {
+            Program.dropoff.AddFirst(_currentBook);
 
+            _currentBook = null;
 
-        Program.dropoff.AddFirst(_currentBook);
-
-        _currentBook = null;
-
+        }
+        Program._semaphoredropoff.Release();
         Console.WriteLine($"Customer {_id} is leaving the library");
 
     }

@@ -5,7 +5,15 @@ namespace booksforall
     internal class Program
     {
         //feel free to change the following values and if needed add variables
-        public static int n_threads = 10;// feel free to change this value
+        public static int n_threads = 1000;// feel free to change this value
+
+        public static Semaphore _semaphorecounter = new Semaphore(0, n_threads);
+
+        public static Semaphore _semaphoredropoff = new Semaphore(0, n_threads);
+
+        public static readonly object _counterlock = new object();
+
+        public static readonly object _dropofflock = new object();
 
         private static Thread[] customer_threads = new Thread[n_threads];
         private static Thread[] clerk_threads = new Thread[n_threads];
@@ -48,7 +56,14 @@ namespace booksforall
             StartCustomers(); //do not alter this call
             // DO NOT CHANGE THE CODE ABOVE
             // use the space below to add your code if needed
-
+            foreach (var thread in clerk_threads)
+            {
+                thread.Join();
+            }
+            foreach (var thread in customer_threads)
+            {
+                thread.Join();
+            }
 
 
             // DO NOT CHANGE THE CODE BELOW
