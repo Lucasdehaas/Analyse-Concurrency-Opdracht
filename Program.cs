@@ -20,8 +20,8 @@ namespace booksforall
 
         private static readonly string studentname1 = "Lucas de Haas";   //name and surname of the student1
         private static readonly string studentnum1 = "1061095";    //student number
-        private static readonly string studentname2 = "Ezra van der Kolk";   //name and surname of the student2
-        private static readonly string studentnum2 = "1052307";    //student number2
+        private static readonly string studentname2 = "";   //name and surname of the student2
+        private static readonly string studentnum2 = "";    //student number2
 
 
         // do not alter the following lines of code 
@@ -56,11 +56,11 @@ namespace booksforall
             StartCustomers(); //do not alter this call
             // DO NOT CHANGE THE CODE ABOVE
             // use the space below to add your code if needed
-            foreach (Thread thread in clerk_threads)
+            foreach (var thread in clerk_threads)
             {
                 thread.Join();
             }
-            foreach (Thread thread in customer_threads)
+            foreach (var thread in customer_threads)
             {
                 thread.Join();
             }
