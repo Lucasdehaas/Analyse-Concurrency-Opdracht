@@ -36,7 +36,7 @@ public class Clerk
     // this method should return the number of books left in the library
     {
         int counter = 0;
-        foreach (var record in _records)
+        foreach (BookRecord record in _records)
         {
             if (record.IsBorrowed == false) //we are counting the books that are int the library (not borrowed)
             {
@@ -64,8 +64,8 @@ public class Clerk
         Book? t_book = null;
         lock (_recordlock)
         {
-            foreach (var record in _records)    // the clerk will look in the records
-                                                // for a book that is not yet borrowed
+            foreach (BookRecord record in _records)    // the clerk will look in the records
+                                                       // for a book that is not yet borrowed
             {
 
                 if (record.IsBorrowed == false)
