@@ -22,8 +22,8 @@ public class Customer
 
         // the customer will come to the library when the book is ready
         // the customer picks up a book that he requested
-        Program._semaphorecounter.WaitOne();
-        lock (Program._counterlock)
+        Program.semaphorecounter.WaitOne();
+        lock (Program.counterlock)
         {
             _currentBook = Program.counter.First();
 
@@ -37,14 +37,14 @@ public class Customer
 
         //the customer will return the book to the dropoff
         Console.WriteLine($"Customer {_id} is dropping off the book {_currentBook.BookId}");
-        lock (Program._dropofflock)
+        lock (Program.dropofflock)
         {
             Program.dropoff.AddFirst(_currentBook);
 
             _currentBook = null;
 
         }
-        Program._semaphoredropoff.Release();
+        Program.semaphoredropoff.Release();
         Console.WriteLine($"Customer {_id} is leaving the library");
 
     }

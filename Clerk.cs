@@ -82,19 +82,19 @@ public class Clerk
         }
         Console.WriteLine($"Clerk [{_id}] putting book [{t_book.BookId}] on the counter");
 
-        lock (Program._counterlock)
+        lock (Program.counterlock)
         {
             Program.counter.AddFirst(t_book);
         }
-        Program._semaphorecounter.Release();
+        Program.semaphorecounter.Release();
         // the clerk will put the book on the counter for the customer
 
         Thread.Sleep(new Random().Next(100, 500));
         //the clerk will take a nap for overworking
 
         //the clerk will wait for a book in the dropoff
-        Program._semaphoredropoff.WaitOne();
-        lock (Program._dropofflock)
+        Program.semaphoredropoff.WaitOne();
+        lock (Program.dropofflock)
         {
             t_book = Program.dropoff.First();
 

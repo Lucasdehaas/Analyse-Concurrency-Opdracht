@@ -7,13 +7,13 @@ namespace booksforall
         //feel free to change the following values and if needed add variables
         public static int n_threads = 1000;// feel free to change this value
 
-        public static Semaphore _semaphorecounter = new Semaphore(0, n_threads);
+        public static Semaphore semaphorecounter = new Semaphore(0, n_threads);
 
-        public static Semaphore _semaphoredropoff = new Semaphore(0, n_threads);
+        public static Semaphore semaphoredropoff = new Semaphore(0, n_threads);
 
-        public static readonly object _counterlock = new object();
+        public static readonly object counterlock = new object();
 
-        public static readonly object _dropofflock = new object();
+        public static readonly object dropofflock = new object();
 
         private static Thread[] customer_threads = new Thread[n_threads];
         private static Thread[] clerk_threads = new Thread[n_threads];
