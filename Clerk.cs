@@ -105,15 +105,13 @@ public class Clerk
 
         foreach (BookRecord record in _records)
         {
-            lock (_recordlock)
+            if (record.Book.BookId == t_book.BookId)
             {
-                if (record.Book.BookId == t_book.BookId)
-                {
-                    record.IsBorrowed = false;
+                record.IsBorrowed = false;
 
-                    break;
-                }
+                break;
             }
+
         }
     }
 }

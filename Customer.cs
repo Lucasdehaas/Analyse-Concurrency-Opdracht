@@ -28,7 +28,6 @@ public class Customer
             _currentBook = Program.counter.First();
 
             Program.counter.RemoveFirst();
-
         }
         Console.WriteLine($"Customer {_id} is about to read the book {_currentBook.BookId}");
 
@@ -40,10 +39,10 @@ public class Customer
         lock (Program.dropofflock)
         {
             Program.dropoff.AddFirst(_currentBook);
-
-            _currentBook = null;
-
         }
+        _currentBook = null;
+
+
         Program.semaphoredropoff.Release();
         Console.WriteLine($"Customer {_id} is leaving the library");
 
