@@ -56,15 +56,14 @@ namespace booksforall
             StartCustomers(); //do not alter this call
             // DO NOT CHANGE THE CODE ABOVE
             // use the space below to add your code if needed
-            foreach (var thread in clerk_threads)
-            {
-                thread.Join();
-            }
             foreach (var thread in customer_threads)
             {
                 thread.Join();
             }
-
+            foreach (var thread in clerk_threads)
+            {
+                thread.Join();
+            }
 
             // DO NOT CHANGE THE CODE BELOW
             //the library is closing, DO NOT ALTER the following lines

@@ -62,10 +62,11 @@ public class Clerk
         Console.WriteLine($"Clerk [{_id}] is going to check in the records for a book to put on the counter");
 
         Book? t_book = null;
-        lock (_recordlock)
+
+        foreach (var record in _records)    // the clerk will look in the records
+                                            // for a book that is not yet borrowed
         {
-            foreach (var record in _records)    // the clerk will look in the records
-                                                // for a book that is not yet borrowed
+            lock (_recordlock)
             {
 
                 if (record.IsBorrowed == false)
@@ -102,9 +103,9 @@ public class Clerk
         //the clerk will check the book in the records
         Console.WriteLine($"Clerk [{_id}] is checking in the book [{t_book.BookId}] in the records");
 
-        lock (_recordlock)
+        foreach (BookRecord record in _records)
         {
-            foreach (BookRecord record in _records)
+            lock (_recordlock)
             {
                 if (record.Book.BookId == t_book.BookId)
                 {
